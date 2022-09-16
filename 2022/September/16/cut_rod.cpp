@@ -27,6 +27,11 @@ int cut_rod(vector<int> price, int ind, int len) {
 	return dp[ind][len] = max(cut, not_cut);
 }
 
+
+// price[0] + profit[len-0]
+// price[1] + profit[len-1]
+// price[2] + profit[len-2].....
+// we get the max of these 
 int cut_rod(vector<int> price, int len) {
 	vector<int> dp(len + 1);
 	for (int i = 0; i <= n; i++) {
