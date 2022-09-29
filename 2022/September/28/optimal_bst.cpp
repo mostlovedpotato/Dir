@@ -1,0 +1,28 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int sum(vector<int> freq, int i, int j);
+
+int opt_cost(vector<int> freq, int i, int j) {
+	if (j < i) return 0;
+	if (j == i) return freq[i];
+	int freq_sumij = sum(freq, i, j);
+	int min = INT_MAX;
+
+	for (int r = i; r <= j; r++) {
+		int cost = opt_cost(freq, i, r - 1) + opt_cost(freq, r + 1, j);
+		if (cost < min)
+			min = cost;
+	}
+	return min + freq_sumij;
+}
+
+int sum(vector<int> freq, int i, int j) {
+	int ret = 0;
+	for (int k = i; k <= j; k++)
+		ret += freq[k];
+	return ret;
+}
