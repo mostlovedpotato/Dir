@@ -15,6 +15,13 @@ int min_removals(vector<int> arr, int l, int r) {
 
 // min and max in the sub array between l and h
 
+int min(vector<int> arr, int l, int h) {
+	int minx = 1e9 + 8;
+	for (int i = l; i <= h; i++) {
+		minx = min(arr[i], minx);
+	}
+	return minx;
+}
 
 int min_removals(string str) {
 	int n = str.size();
