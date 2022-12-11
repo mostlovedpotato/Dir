@@ -37,3 +37,10 @@ void sol() {
 	clr(dp, -1);
 	cout << cal(0, n - 1, 1);
 }
+
+int main() {
+	int q = 1;
+	while (q--) {
+		sol();
+	}
+}
