@@ -22,9 +22,12 @@
 
 **Finally, plugging in $$x = n+1$$ to find $$P(n+1)$$ gives:**
 
-**$$Q(n+1)=(n+2)P(n+1)-(n+1)$$
-$$(-1)^{n+1}\dfrac{1}{(n+1)!}\cdot(n+1)! =(n+2)P(n+1)-(n+1)$$ $$(-1)^{n+1}=(n+2)P(n+1)-(n+1)$$
-$$(-1)^{n+1}+(n+1)=(n+2)P(n+1)$$
-$$P(n+1) = \dfrac{(-1)^{n+1} + (n+1)}{n+2}$$**
+**$$Q(n+1)=(n+2)P(n+1)-(n+1)$$**
+
+**$$(-1)^{n+1}\dfrac{1}{(n+1)!}\cdot(n+1)! =(n+2)P(n+1)-(n+1)$$ $$(-1)^{n+1}=(n+2)P(n+1)-(n+1)$$**
+
+**$$(-1)^{n+1}+(n+1)=(n+2)P(n+1)$$**
+
+**$$P(n+1) = \dfrac{(-1)^{n+1} + (n+1)}{n+2}$$**
 
 **If $$n$$ is even, this simplifies to $$P(n+1) = \dfrac{n}{n+2}$$. If $$n$$ is odd, this simplifies to $$P(n+1) = 1$$. $$\Box$$** 
