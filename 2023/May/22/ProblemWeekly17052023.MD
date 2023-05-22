@@ -15,8 +15,8 @@
 **We plug in $$x = -1$$ to cancel the $$(x+1)P(x)$$ and find $$c$$:**
 
  **$$-(-1) = c(-1)(-1-1)(-1-2) \cdots (-1-n)$$**
- $$\hspace{0.25cm}1 = c(-1)^{n+1}(1)(2) \cdots (n+1)$$ 
- $$\hspace{0.25cm}c = (-1)^{n+1}\dfrac{1}{(n+1)!}$$
+ **$$\hspace{0.25cm}1 = c(-1)^{n+1}(1)(2) \cdots (n+1)$$** 
+ **$$\hspace{0.25cm}c = (-1)^{n+1}\dfrac{1}{(n+1)!}$$**
 
 **Finally, plugging in $$x = n+1$$ to find $$P(n+1)$$ gives:**
 
