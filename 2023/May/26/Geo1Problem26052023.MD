@@ -38,7 +38,7 @@ A glance at a figure shows that the center of $C$ is always in such a position t
 That the major semiaxis of the ellipse is $(a_1 + a_2)/2$ is indeed rather obvious. To determine the minor semiaxis, consider circle $C$ with the center at the topmost point of the ellipse. The triangle of the centers of the three circles will then be isosceles, with the legs equal to $(a_1 + a_2)/2$ and the base $a_2 - a_1$.
 The altitude $h$ of the triangle is found from the Pythagorean theorem:
 
- 	$$h² = [(a_1 + a_2)/2]^2 - [(a_2 - a_1)/2]^2$$
+$$h² = [(a_1 + a_2)/2]^2 - [(a_2 - a_1)/2]^2$$
 
 so that indeed, $h^2 = a_1 \cdot a_2$.
 
