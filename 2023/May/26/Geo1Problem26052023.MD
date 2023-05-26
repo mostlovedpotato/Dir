@@ -44,7 +44,7 @@ so that indeed, $h^2 = a_1 \cdot a_2$.
 
 If $C_t$ is a circle of radius $r_t$ and center $P_t(x_t, y_t)$ where
 
-$$t = a_1 \cdot a_2 + t^2 (a$2 - a$1)^2$$,
+$$t = a_1 \cdot a_2 + t^2 (a_2 - a_1)^2$$,
 $$r_t = a_1 \cdot a_2(a_2 - a_1) / φ_t$$,
 $$x_t = a_1 \cdot a_2 \cdot (a_2 + a_1) / φ_t$$,
 $$y_t = 2 \cdot t \cdot r_t.$$
