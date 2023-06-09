@@ -12,21 +12,28 @@ void dwim(It b, It e){
 auto derefUPLess = [](const std::unique_ptr<Widget>& p1,const std::unique_ptr<widget>& p2){
 	return *p1<*p2;
 };
+
 ```
 we are giving type for derefUPLess here. 
 we can further make it smaller
+
 ```
 auto derefLess = [](const auto& p1,const auto& p2){return *p1 < *p2;};
 ```
+
 with using function pointer we would write it as 
 first signature for the functino would be
+
 ```
 bool(const std::unique_ptr<widget>&,const std::unique_ptr<Widget>&)
 ```
+
 now using function pointer as 
+
 ```
 std::function<bool(const std::unique_ptr<widget>&,const std::unique_ptr<widget>&)> func;
 ```
+
 in overall we would deeclare the same function 'derefUPLess' as below
 
 ```
@@ -43,6 +50,7 @@ auto declarations is - as example below
 std::vector<int> v;
 unsigned sz = v.size();
 ```
+
 Here the official return type of v.size() is std::vector<int>::size_type but it's type is unsigned integral type.
 so a lot of programmers write above code but we have to know that
 on 32-bit windows, both unsigned and std::vector<int>::size_type have same size,
@@ -56,7 +64,8 @@ std::unordered_map<std::string, int> m;
 for (const std::pair<std::string, int>& p : m)
 {
 … // do something with p
-}```
+}
+```
 
 Now we see the above code,at first glace nothing seems wrong with this.
 But the problem is we know the key part of the std::unordered_map<key,value> is 
