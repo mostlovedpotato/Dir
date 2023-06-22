@@ -17,3 +17,8 @@ Design Principles
 1. SRP - Everything should do just one thing. Separate concerns, to isolate 
 and simplify change. 
 2. Open-Closed principle easy to extend.
+
+Resist the urge to put everything into classes.
+
+Rule of zero - don't implement core functions default operations.
+
