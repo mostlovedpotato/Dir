@@ -53,4 +53,105 @@ export function findMaxSlidingWindow(nums, w) {
 }
 ```
 
+Question B: 
+Merge Intervals -> But considering we need to add one interval in between. And provide final non-overalapping.
+array of intervals.
 
+So, it's simple in this case. 
+We are given a non-overlapping array of intervals. IF not non-overlapping, we can just make them non-overlappnig.
+once sorting and then merge the required intervals. 
+
+once they are non-overalapping, let's focus on our solution. 
+
+
+We will start from t he first end and keep adding the intervals into our output array until, 
+
+intervals[i][0] < toBeAdded[0]
+
+And then once we are out of loop, 
+we are at the position where we need to add the new Interval at, 
+But new interval can cause chaos in subsequent intervals as it can be big and overlapping many of the subsequent
+intervals. 
+
+So, we have to keep adding intervals with caution now.
+
+We first add the new Intervals with proper checks and then continue on iteration for i, until the end as below.
+
+C++. 
+```
+vector<vector<int>> InsertInterval(vector<vector<int>> intervals, vector<int> newInterval)
+{
+    // Replace this placeholder return statement with your code
+    // here we just want to insert an interval. 
+    // we search through the sorted intervals using binary search wrt first element 
+    // of the interval.
+    
+    vector<vector<int>> res;
+    vector<int> curr;
+    int i = 0;
+    while(i < intervals.size() && intervals[i][0] < newInterval[0]) {
+        res.push_back(intervals[i]);
+        i++;
+    }
+    if(res.empty() || newInterval[0] > res.back()[1]) {
+        res.push_back(newInterval);
+    } else {
+        res.back()[1] = max(res.back()[1], newInterval[1]);
+    }
+    while(i < intervals.size()) {
+        curr = intervals[i];
+        if(res.empty() || curr[0] > res.back()[1]) {
+            res.push_back(curr);
+        } else {
+            res.back()[1] = max(res.back()[1], curr[1]);
+        }
+        i++;
+    }
+    
+    return res;
+    return {};
+}```
+
+So, here we can see how we check if newInterval[0] > res.back()[1] which means there is no overlap,
+so we just add the new interval.
+otherwise we will need to take max of the both interval ends.
+
+And subsequently while adding other remaining interals we follow the same thing.
+
+
+Question C: 
+Print nth line of Pascal's triagle. Now I realised, we cna't use binomial coefficients expansion to 
+actually calculate the nth line in pascal's triangle, due to int storage size constraints, 
+
+The value of $n!$ moves very fast, while value of $nCx$ moves slower, but calculating the value of $nCx$ 
+requires factorial calculation which will limit us.
+
+So, better use recursion to calculate the pascal's triagle. 
+
+if 1, [1] we return [1] 
+
+then on subsequent we will have initial array [1], 
+and use previous array let's say example previous row is [1, 3, 3, 1]
+then we want to calculate the next row. Then we do [1, (1 + 3), (3 + 3), (3 + 1)],
+
+And we append [1] at the end too. 
+
+So, while travelling the previousArray we travel for previousArray.length - 1 times.
+JS
+```
+function getPascalLine(n) {
+	if(n == 0) {
+		return [1];
+	}
+	else {
+		var line = [1];
+
+		previousLine = getPascalLine(n-1);
+		for(var i = 0; i < previousLine.length; i++) {
+			line.push(previousLine[i] + previousLine[i+1]);
+		}
+		line.push(1);
+	}
+	return line;
+}
+```
