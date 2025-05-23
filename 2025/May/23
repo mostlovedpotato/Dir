@@ -1,0 +1,56 @@
+Question A: 
+Given an integer array, nums, find the maximum values in all the contiguous subarrays (windows) of size w.
+
+Here the approach is quite good, we make a deque, 
+And use it to store the element indices, largest first one, 
+
+And if any elements that comes after it and is smaller we store it, 
+if it's bigger we just remove the elements smaller than it, cz they already smaller and also they came before
+this current bigger number, so, they will be gone before this number.
+
+So, we keep removing elements which are smaller than current element from the deque from the back.
+
+then we add the current element.
+
+And finally we push the current max element which will be the deque[0]th element to the result.
+In js: 
+
+```
+
+export function findMaxSlidingWindow(nums, w) {
+    let deque = [];
+    let res = [];
+    
+    for(let i = 0; i< nums.length; i++) {
+        
+        // first we check if the current element at the back 
+        // goes out of bounds and pop until the elements are out
+        // of bound of window.
+        while(deque.length && deque[0] <= i - w ) {
+            deque.shift();
+        }
+        
+        // then we remove all the elements starting from the 
+        // back which are smaller than current element
+        // because current element is longer lived and will 
+        // be greatest of them so, other's are no useful
+        while(deque.length && nums[deque[deque.length - 1]] <= nums[i]) {
+            deque.pop();
+        }
+        
+        // also we need to push the current element index to deque
+        deque.push(i);
+        // and if the window is good size like we already compared 
+        // w elements then we start puhsing the elements to the result
+        // result consists of elements at zero index which are largest
+        // always.
+        if(i >= (w-1)) {
+            res.push(nums[deque[0]]);
+        }
+    }
+    
+    return res;
+}
+```
+
+
