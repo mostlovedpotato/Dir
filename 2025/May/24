@@ -1,0 +1,118 @@
+Question A: 
+Implment simple data structure to insert, delete should be in O(1) &
+getRandome() should be one of the function to get a random value also in O(1).
+
+--> So, here we can use one vector / array to store the values or say elements.
+Then we keep one hashmap -> valueToIndex which will keep track of the indices of elements in the array.
+easier to delete. For insert we just add it to the end of the array.
+
+for delete we just find the index and swap the element with the last element in the arrray and then delete it. 
+also ofc we need to update the elements index in the valueToIndex map.
+
+and for getRandom() we just pick up random element from the array we don't need any manipulation. 
+
+JS
+```
+class RandomSet {
+    // Initialize your data structure here
+    constructor() {
+        this.values = [];       // Stores the elements
+        this.valueToIndex = {}; // Maps element to its index in values
+    }
+
+    insert(data) {
+        if (data in this.valueToIndex) {
+            return false; // Data already exists
+        }
+        this.values.push(data);
+        this.valueToIndex[data] = this.values.length - 1;
+        return true;
+    }
+
+    delete(data) {
+        if (!(data in this.valueToIndex)) {
+            return false; // Data not found
+        }
+        const index = this.valueToIndex[data];
+        const lastElement = this.values[this.values.length - 1];
+
+        // Swap the element with the last element in the array
+        this.values[index] = lastElement;
+        this.valueToIndex[lastElement] = index;
+
+        // Remove the last element and clean up the hash map
+        this.values.pop();
+        delete this.valueToIndex[data];
+
+        return true;
+    }
+
+    getRandom() {
+        const randomIndex = Math.floor(Math.random() * this.values.length);
+        return this.values[randomIndex];
+    }
+}
+
+export default RandomSet;
+```
+
+Questoin B:
+-->Here we want to make linked list : L0->L1->L2->L3->....->L(n-1)->Ln
+As : L0->Ln->L1->L(n-1)->....
+
+Now if you think for some time, you will come across an idea about reversing half of the linked list.
+So, we can travel from front and the back and then construct our new linked list.
+
+So, yeah we are doing the same, but instead of making it complex, 
+we break the linked list in the middle and then we reverse the other half of linked list.
+Then we travel both of them and adding them interleaving.
+
+C++
+```
+ListNode* ReorderList(ListNode* head) {
+  
+    // Replace this placeholder return statement with your code
+    if(!head || !head->next) return head;
+    ListNode *slow = head;
+    ListNode *fast = head;
+    while(fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    
+    ListNode *second_list = slow->next;
+    slow->next = nullptr;
+    
+    // now we reverse the second list.
+    ListNode *curr = second_list;
+    ListNode *prev = nullptr;
+    
+    while(curr) {
+        ListNode *next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    ListNode* head2 = prev;
+    
+    // now we merge two of the lists interleaving.
+    // link one to two.
+    ListNode *start = head;
+    ListNode *start2 = head2;
+    while(start2) {
+        ListNode *temp = start->next;
+        ListNode *temp2 = start2->next;
+        start->next = start2;
+        start2->next = temp;
+        start = temp;
+        start2 = temp2;
+    }
+    return head;
+}```
+
+Question Bonus: To check palindrome in the string. 
+We can do the same. find the mid, ignore the mid. 
+Start in second half and then reverse the second half.
+And compare if they are not not same at some point. 
+
+
