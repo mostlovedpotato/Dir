@@ -1,0 +1,53 @@
+Question A:
+Diameter of a tree.
+But we are given list of edges [ai, bi] as input.
+
+--> First we need to convert this list to adjacency list.
+Then we do dfs, and find at each node the largest and second_largest height.
+
+And then calculate (largest + second_largest) 
+we take max and keep updating it.
+
+Our dfs returns maxdepth at each node.
+
+JS
+```
+function treeDiameter(edges) {
+    if (edges.length === 0) return 0;
+    
+    const n = edges.length + 1;
+    const adj = Array.from({length : n}, () => []);
+    for(const [a, b] of edges) {
+        adj[a].push(b);
+        adj[b].push(a);
+    }
+
+    let diameter = 0;
+    const dfs = (node, parent) => {
+        let currDepth = 0;
+        let currDepth2 = 0;
+        
+        for(const neighbor of adj[node]) {
+            if(neighbor == parent) {
+                continue; 
+            }
+            const depth = dfs(neighbor, node) + 1;
+            if(depth > currDepth) {
+                currDepth2 = currDepth;
+                currDepth = depth;
+            } else if(depth > currDepth2) {
+                currDepth2 = depth;
+            }
+            
+        }
+        diameter = Math.max(diameter, currDepth + currDepth2);
+        return currDepth;
+    }
+    
+
+    dfs(0, -1); // Start from any node (e.g., root=0)
+    return diameter;
+}
+
+export { treeDiameter };
+```
