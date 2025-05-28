@@ -1,0 +1,63 @@
+Question: how do we run a C++ program in blender. 
+
+--> blender support python scripts.
+What we do here is for windows we create a dll file and then. 
+use ctype to run that.
+
+It's easy, Let's check with an example :
+
+C++
+```
+extern "C" {
+	__declspec(dllexport) int add(int a, int b) {
+		return a + b;
+	}
+}
+```
+
+And Python 
+Py
+```
+import os
+import bpy
+from ctypes import CDLL, c_int
+
+def show_message(message, title="Info", icon='INFO'):
+    """A more reliable way to show messages in Blender"""
+    def draw(self, context):
+        self.layout.label(text=message)
+    
+    bpy.context.window_manager.popup_menu(draw, title=title, icon=icon)
+
+try:
+    # 1. Define the absolute path to the DLL
+    blend_path = os.path.dirname(os.path.abspath(__file__))
+    script_dir = os.path.dirname(blend_path)
+#    raise FileNotFoundError(f"DLL not found at : {script_dir}")
+    dll_path = os.path.join(script_dir, "math_operations.dll")
+    print("__file__:", __file__)
+    print("abspath:", os.path.abspath(__file__))
+    print("dirname:", os.path.dirname(os.path.abspath(__file__)))
+    print("final path:", dll_path)
+    
+    # 2. Verify DLL exists
+    if not os.path.exists(dll_path):
+        raise FileNotFoundError(f"DLL not found at: {dll_path}")
+    
+    # 3. Load and use the DLL
+    math_ops = CDLL(dll_path)
+    math_ops.add.argtypes = [c_int, c_int]
+    math_ops.add.restype = c_int
+    
+    result = math_ops.add(3, 5)
+    msg = f"C++ Calculation Result: 3 + 5 = {result}"
+    
+    # 4. Output results
+    print(msg)  # Always works in console
+    show_message(msg)  # Works in UI context
+    
+except Exception as e:
+    error_msg = f"Error: {str(e)}"
+    print(error_msg)
+    show_message(error_msg, "Error", 'ERROR')
+```
